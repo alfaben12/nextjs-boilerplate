@@ -1,15 +1,10 @@
 import '../styles/globals.css';
-import { useStore } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { wrapper } from '../store';
+import { AppProps } from 'next/app';
+import { NextPage } from 'next';
+import { wrapper } from '../store/store';
 
-function MyApp({ Component, pageProps }) {
-  const store = useStore((state) => state);
-  return (
-    <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
-      <Component {...pageProps} />
-    </PersistGate>
-  );
-}
+const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
+  return <Component {...pageProps} />;
+};
 
 export default wrapper.withRedux(MyApp);
